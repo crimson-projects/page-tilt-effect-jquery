@@ -1,0 +1,124 @@
+$primary-color: #243040;
+
+body {
+	font-family: 'Architects Daughter', sans-serif;
+}
+
+#paper-back {
+	width: 100%;
+	height: 100vh;
+	background-color: $primary-color;
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 33px;
+	nav {
+		padding: 120px 34px;
+		a {
+			display: block;
+			margin-bottom: 25px;
+			text-decoration: none;
+			color: rgba(white, 0.7);
+		}
+	}
+}
+
+//prevents the scrolling when the menu is open
+#paper-window {
+	height: 100vh;
+	width: 100vw;
+	position: relative; 
+	overflow-x: hidden;
+	overflow-y: scroll;
+	z-index: 2;
+	
+	&.tilt {
+		overflow: hidden;
+		pointer-events: none;
+		#paper-front { transform: rotate(10deg) translateZ(0); }
+	}
+}
+
+//this is what actually rotates
+#paper-front {
+	pointer-events: auto;
+	position: relative;
+	z-index: 3;
+	background-color: white;
+	box-shadow: 0 0 20px rgba(black, 0.7);
+	transform-origin: center 70%;
+	transition: all 0.3s ease;
+}
+
+//actual content
+#container {
+	section {
+		height: 600px;
+		text-align: center;
+		&:first-of-type {
+			padding-top: 10vh;	
+			h1 { font-size: 45px; }
+			p { font-size: 25px; }
+			@media (max-width: 600px) {
+				padding-top: 15vh;	
+				h1 { font-size: 30px; }
+				p { font-size: 18px; }
+			}
+		}
+		&:nth-of-type(2n) {
+			background-color: lighten($primary-color, 75%);
+		}
+	}
+}
+
+.hamburger {
+	position: fixed;
+	z-index: 4;
+	top: 30px;
+	left: 30px;
+	width: 45px;
+	height: 34px;
+	cursor: pointer;
+	user-select: none;
+	span {
+		position: relative;
+		
+		&, &:before, &:after {
+			display: block;
+			width: 45px;
+			height: 6px;
+			background-color: $primary-color;
+			border-radius: 2px;
+		}
+		
+		&:before, &:after {
+			content: '';
+			position: absolute;
+		}
+		&:before { bottom: -14px; }
+		&:after {	bottom: -28px; }
+		
+	}
+}
+
+.close {
+	position: fixed;
+	top: 30px;
+	left: 30px;
+	width: 45px;
+	height: 34px;
+	cursor: pointer;
+	
+	&:before, &:after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 45px;
+			height: 6px;
+			top: 50%;
+			background-color: white;
+			border-radius: 2px;
+		}
+		&:before { transform: translateY(-50%) rotate(45deg); }
+		&:after {	transform: translateY(-50%) rotate(-45deg); }
+}
